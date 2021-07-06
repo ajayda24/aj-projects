@@ -30,18 +30,21 @@ export function handleTouchMove(evt, router, pathUp, pathDown) {
     if (xDiff > 0) {
       /* left swipe */
       // console.log('swipe left')
+      router.push(`/${pathDown}`)
     } else {
       /* right swipe */
       // console.log('swipe right')
+      router.push(`/${pathUp}`)
+
     }
   } else {
     if (yDiff > 0) {
       /* up swipe */
-      router.push(`/${pathDown}`)
+      // router.push(`/${pathDown}`)
       // console.log('swipe up')
     } else {
       /* down swipe */
-      router.push(`/${pathUp}`)
+      // router.push(`/${pathUp}`)
       // console.log('swipe down')
     }
   }
