@@ -6,9 +6,10 @@ export default function Home() {
   const router = useRouter()
   return (
     <DivContainer
-      onWheel={(e) => handleWheel(e, router, 'project', '')}
+      bg='#2C061F'
+      onWheel={(e) => handleWheel(e, router, 'project', 'about')}
       onTouchStart={handleTouchStart}
-      onTouchMove={(e) => handleTouchMove(e, router,'project','')}
+      onTouchMove={(e) => handleTouchMove(e, router, 'project', 'about')}
     >
       <Div>About Page</Div>
     </DivContainer>

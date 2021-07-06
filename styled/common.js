@@ -5,7 +5,7 @@ export const DivContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: crimson;
+  background-color: ${(props) => (props.bg ? props.bg : 'crimson')};
   height: 100vh;
 `
 
