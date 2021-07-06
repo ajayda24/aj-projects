@@ -40,11 +40,11 @@ export function handleTouchMove(evt, router, pathUp, pathDown) {
   } else {
     if (yDiff > 0) {
       /* up swipe */
-      // router.push(`/${pathDown}`)
+      router.push(`/${pathDown}`)
       // console.log('swipe up')
     } else {
       /* down swipe */
-      // router.push(`/${pathUp}`)
+      router.push(`/${pathUp}`)
       // console.log('swipe down')
     }
   }
@@ -54,11 +54,17 @@ export function handleTouchMove(evt, router, pathUp, pathDown) {
 }
 
 export const handleWheel = (evt,router, pathUp, pathDown) => {
+  console.log(evt.deltaY)
   if (evt.deltaY < 0) {
     // console.log('scrolling up')
-    router.push(`/${pathUp}`)
+    setTimeout(()=>{
+      router.push(`/${pathUp}`)
+    },300)
   } else if (evt.deltaY > 0) {
-    router.push(`/${pathDown}`)
+    setTimeout(()=>{
+      router.push(`/${pathDown}`)
+    },300)
+    
     // console.log('scrolling down')
   }
 }
