@@ -14,7 +14,13 @@ export function handleTouchStart(evt) {
   yDown = firstTouch.clientY
 }
 
-export function handleTouchMove(evt, router, pathUp, pathDown) {
+export function handleTouchMove(
+  evt,
+  router,
+  forward,
+  backward,
+  changeLoadingState
+) {
   if (!xDown || !yDown) {
     return
   }
@@ -28,23 +34,38 @@ export function handleTouchMove(evt, router, pathUp, pathDown) {
   if (Math.abs(xDiff) > Math.abs(yDiff)) {
     /*most significant*/
     if (xDiff > 0) {
+      if (backward) {
+        router.push(backward)
+        changeLoadingState((prevState) => !prevState)
+      }
+
       /* left swipe */
       // console.log('swipe left')
-      router.push(`/${pathDown}`)
     } else {
+      if (forward) {
+        router.push(forward)
+        changeLoadingState((prevState) => !prevState)
+      }
+
       /* right swipe */
       // console.log('swipe right')
-      router.push(`/${pathUp}`)
-
     }
   } else {
     if (yDiff > 0) {
       /* up swipe */
-      router.push(`/${pathDown}`)
+      if (backward) {
+        router.push(backward)
+        changeLoadingState((prevState) => !prevState)
+      }
+
       // console.log('swipe up')
     } else {
       /* down swipe */
-      router.push(`/${pathUp}`)
+      if (forward) {
+        router.push(forward)
+        changeLoadingState((prevState) => !prevState)
+      }
+
       // console.log('swipe down')
     }
   }
@@ -53,18 +74,29 @@ export function handleTouchMove(evt, router, pathUp, pathDown) {
   yDown = null
 }
 
-export const handleWheel = (evt,router, pathUp, pathDown) => {
-  console.log(evt.deltaY)
+export const handleWheel = (
+  evt,
+  router,
+  forward,
+  backward,
+  changeLoadingState
+) => {
   if (evt.deltaY < 0) {
     // console.log('scrolling up')
-    setTimeout(()=>{
-      router.push(`/${pathUp}`)
-    },300)
+    setTimeout(() => {
+      if (forward) {
+        router.push(forward)
+        changeLoadingState((prevState) => !prevState)
+      }
+    }, 200)
   } else if (evt.deltaY > 0) {
-    setTimeout(()=>{
-      router.push(`/${pathDown}`)
-    },300)
-    
+    setTimeout(() => {
+      if (backward) {
+        router.push(backward)
+        changeLoadingState((prevState) => !prevState)
+      }
+    }, 200)
+
     // console.log('scrolling down')
   }
 }
